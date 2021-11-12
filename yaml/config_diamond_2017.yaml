@@ -1,0 +1,25 @@
+file_paths:
+    sxrd_cpf_alpha_results_file: ../../SXRD_results/diamond_2017/{experiment_number:03d}/texture-cpf/{experiment_number:03d}-raw-intensities-10deg/alpha/{experiment_number:03d}_texture_strength.txt
+# File path to the SXRD texture results for the alpha-phase, refined using Continuous_Peak_fit with Fourier peak analysis.
+
+    sxrd_cpf_beta_results_file: ../../SXRD_results/diamond_2017/{experiment_number:03d}/texture-cpf/{experiment_number:03d}-raw-intensities-10deg/beta/{experiment_number:03d}_texture_strength.txt
+# File path to the SXRD texture results for the beta-phase, refined using Continuous_Peak_fit with Fourier peak analysis.
+
+    sxrd_maud_alpha_results_file: ../../SXRD_results/diamond_2017/{experiment_number:03d}/texture-maud/{experiment_number:03d}_texture_plots/alpha/texture_strength_alpha_{experiment_number:03d}.txt
+# File path to the SXRD texture results for the alpha-phase, refined using MAUD with Rietveld refinement.
+    
+    sxrd_maud_beta_results_file: ../../SXRD_results/diamond_2017/{experiment_number:03d}/texture-maud/{experiment_number:03d}_texture_plots/beta/texture_strength_beta_{experiment_number:03d}.txt
+# File path to the SXRD texture results for the beta-phase, refined using MAUD with Rietveld refinement.
+
+    output_folder: ../../SXRD_results/diamond_2017/{experiment_number:03d}/texture-
+# File path to output folder for saving the results and figure images from the analysis.
+
+user_inputs:
+    sxrd_experiment_number: 65
+# Experiment number for the SXRD results.
+    
+    phase_1: alpha
+# Name of phase 1    
+    
+    phase_2: beta
+# Name of phase 2   

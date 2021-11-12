@@ -1,0 +1,31 @@
+file_paths:
+    ebsd_alpha_results_file: ../../SXRD_results/diamond_2021/ebsd/Ti64_915C_87pct_Sample1_TD-ND_Plane/Ti64_915C_87pct_Sample1_TD-ND_Plane_texture_strength_387.txt
+# File path to the EBSD texture results for the alpha-phase.
+    
+    ebsd_beta_results_file: ../../SXRD_results/diamond_2021/ebsd/Ti64_915C_87pct_Sample1_TD-ND_Plane_Beta/Ti64_915C_87pct_Sample1_TD-ND_Plane_Beta_texture_strength_387.txt
+# File path to the EBSD texture results for the beta-phase.
+    
+    sxrd_cpf_alpha_results_file: ../../SXRD_results/diamond_2021/{experiment_number:06d}/texture-cpf-stage-scan/{experiment_number:06d}-raw-intensities-10deg/{experiment_number:06d}_texture_strength.txt
+# File path to the SXRD texture results for the alpha-phase, refined using Continuous_Peak_fit with Fourier peak analysis.
+
+    sxrd_cpf_beta_results_file: ../../SXRD_results/diamond_2021/{experiment_number:06d}/texture-cpf-stage-scan/{experiment_number:06d}-raw-intensities-10deg-beta/{experiment_number:06d}_texture_strength.txt
+# File path to the SXRD texture results for the beta-phase, refined using Continuous_Peak_fit with Fourier peak analysis.
+    
+    sxrd_maud_alpha_results_file: ../../SXRD_results/diamond_2021/{experiment_number:06d}/texture-maud-stage-scan/{experiment_number:06d}_texture_plots/15deg/alpha/texture_strength_alpha_{experiment_number:06d}.txt
+# File path to the SXRD texture results for the alpha-phase, refined using MAUD with Rietveld refinement.
+    
+    sxrd_maud_beta_results_file: ../../SXRD_results/diamond_2021/{experiment_number:06d}/texture-maud-stage-scan/{experiment_number:06d}_texture_plots/15deg/beta/texture_strength_beta_{experiment_number:06d}.txt
+# File path to the SXRD texture results for the beta-phase, refined using MAUD with Rietveld refinement.
+
+    output_folder: ../../SXRD_results/diamond_2021/texture_strength_comparison/
+# File path to output folder for saving the results and figure images from the analysis.
+    
+user_inputs:
+    sxrd_experiment_number: 103845
+# Experiment number for the SXRD results.
+    
+    phase_1: alpha
+# Name of phase 1    
+    
+    phase_2: beta
+# Name of phase 2      
