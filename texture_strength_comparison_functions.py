@@ -84,6 +84,61 @@ def load_sxrd_cpf_alpha(config_path: str):
     print("The SXRD results using Fourier peak analysis have been written to new arrays with the following keys: ", cpf_alpha_results.keys(), sep = '\n', end = '\n\n')
     
     return cpf_alpha_results
+
+def load_sxrd_cpf_alpha_multihit(config_path: str):
+    """Load SXRD alpha-phase texture results refined using 
+    Continuous-Peak-Fit, using Fourier peak analysis, from 
+    text file based on input parameters from a yaml configuration file.
+    
+    :param config_path: path to the configuration file.
+    
+    :return: SXRD alpha texture results from Continuous-Peak-Fit 
+    as a dictionary, containing arrrays of texture refinement data.
+    """
+    config = get_config(config_path)
+    
+    sxrd_experiment_number = config["user_inputs"]["sxrd_experiment_number"]
+    print("The SXRD experiment number is: ", sxrd_experiment_number, sep = '\n', end = '\n\n')
+
+    stage_numbers = config["user_inputs"]["stage_number"]
+    print("The multi-hit stage numbers are: ", stage_numbers, sep = '\n', end = '\n\n')
+    
+    image_number_end = config["user_inputs"]["image_number_end"]
+    print("The image numbers at the end of each stage are: ", image_number_end, sep = '\n', end = '\n\n')
+    
+    sxrd_cpf_results = np.empty((0,9), float)
+    count = 0
+    image_number_last = 0
+    
+    for stage_number in stage_numbers:
+        
+        sxrd_cpf_alpha_results_file = config["file_paths"]["sxrd_cpf_alpha_results_file"].format(experiment_number = sxrd_experiment_number, stage_number = stage_number)
+        print("The SXRD results file is: ", sxrd_cpf_alpha_results_file, sep = '\n', end = '\n\n')
+
+        sxrd_cpf_results_stage = np.loadtxt(sxrd_cpf_alpha_results_file, usecols = np.arange(0,9), dtype='str', skiprows = 1)
+        
+        for i in range(0,len(sxrd_cpf_results_stage)):
+            sxrd_cpf_results_stage[i,0] = sxrd_cpf_results_stage[i,0].astype(float) + image_number_last
+        
+        sxrd_cpf_results = np.append(sxrd_cpf_results, sxrd_cpf_results_stage, axis=0)
+        image_number_last = image_number_last + image_number_end[count]
+        count += 1
+        
+    cpf_alpha_results = {
+                    "image_number" : sxrd_cpf_results[:,0].astype(float),
+                    "texture_index" : sxrd_cpf_results[:,1].astype(float),
+                    "odf_max" : sxrd_cpf_results[:,2].astype(float),
+                    "phi1" : sxrd_cpf_results[:,3].astype(float),
+                    "PHI" : sxrd_cpf_results[:,4].astype(float),
+                    "phi2" : sxrd_cpf_results[:,5].astype(float),
+                    "0002_pf_max" : sxrd_cpf_results[:,6].astype(float),
+                    "10-10_pf_max" : sxrd_cpf_results[:,7].astype(float),
+                    "11-20_pf_max" : sxrd_cpf_results[:,8].astype(float),
+                    }
+    
+    print("The SXRD results using Fourier peak analysis have been written to new arrays with the following keys: ", cpf_alpha_results.keys(), sep = '\n', end = '\n\n')
+    
+    return cpf_alpha_results
     
 def load_sxrd_maud_alpha(config_path: str):
     """Load SXRD alpha-phase texture results refined using MAUD,
@@ -193,6 +248,61 @@ def load_sxrd_cpf_beta(config_path: str):
     
     return cpf_beta_results
 
+def load_sxrd_cpf_beta_multihit(config_path: str):
+    """Load SXRD beta-phase texture results refined using 
+    Continuous-Peak-Fit, using Fourier peak analysis, from 
+    text file based on input parameters from a yaml configuration file.
+    
+    :param config_path: path to the configuration file.
+    
+    :return: SXRD beta texture results from Continuous-Peak-Fit 
+    as a dictionary, containing arrrays of texture refinement data.
+    """
+    config = get_config(config_path)
+    
+    sxrd_experiment_number = config["user_inputs"]["sxrd_experiment_number"]
+    print("The SXRD experiment number is: ", sxrd_experiment_number, sep = '\n', end = '\n\n')
+
+    stage_numbers = config["user_inputs"]["stage_number"]
+    print("The multi-hit stage numbers are: ", stage_numbers, sep = '\n', end = '\n\n')
+    
+    image_number_end = config["user_inputs"]["image_number_end"]
+    print("The image numbers at the end of each stage are: ", image_number_end, sep = '\n', end = '\n\n')
+    
+    sxrd_cpf_results = np.empty((0,9), float)
+    count = 0
+    image_number_last = 0
+    
+    for stage_number in stage_numbers:
+    
+        sxrd_cpf_beta_results_file = config["file_paths"]["sxrd_cpf_beta_results_file"].format(experiment_number = sxrd_experiment_number, stage_number = stage_number)
+        print("The SXRD results file is: ", sxrd_cpf_beta_results_file, sep = '\n', end = '\n\n')
+    
+        sxrd_cpf_results_stage = np.loadtxt(sxrd_cpf_beta_results_file, usecols = np.arange(0,9), dtype='str', skiprows = 1)
+        
+        for i in range(0,len(sxrd_cpf_results_stage)):
+            sxrd_cpf_results_stage[i,0] = sxrd_cpf_results_stage[i,0].astype(float) + image_number_last
+        
+        sxrd_cpf_results = np.append(sxrd_cpf_results, sxrd_cpf_results_stage, axis=0)
+        image_number_last = image_number_last + image_number_end[count]
+        count += 1
+    
+    cpf_beta_results = {
+                    "image_number" : sxrd_cpf_results[:,0].astype(float),
+                    "texture_index" : sxrd_cpf_results[:,1].astype(float),
+                    "odf_max" : sxrd_cpf_results[:,2].astype(float),
+                    "phi1" : sxrd_cpf_results[:,3].astype(float),
+                    "PHI" : sxrd_cpf_results[:,4].astype(float),
+                    "phi2" : sxrd_cpf_results[:,5].astype(float),
+                    "001_pf_max" : sxrd_cpf_results[:,6].astype(float),
+                    "110_pf_max" : sxrd_cpf_results[:,7].astype(float),
+                    "111_pf_max" : sxrd_cpf_results[:,8].astype(float),
+                    }
+    
+    print("The SXRD results using Fourier peak analysis have been written to new arrays with the following keys: ", cpf_beta_results.keys(), sep = '\n', end = '\n\n')
+    
+    return cpf_beta_results
+
 def load_sxrd_maud_beta(config_path: str):
     """Load SXRD beta-phase texture results refined using MAUD,
     using Rietveld refinement analysis, from text file 
@@ -228,7 +338,7 @@ def load_sxrd_maud_beta(config_path: str):
     
 def plot_texture_strength(sxrd_experiment_number: int, phase: str, texture_strength_type: str, output_folder: str,
                           ebsd_results: dict, cpf_results: dict, maud_results: dict):
-    """Plot texture strength versus image (scan) number
+    """Plot texture strength versus image (frame) number
     for EBSD, SXRD-CPF and SXRD-MAUD texture results.
     Options available to select phase (alph or beta) and 
     type of texture strength being plotted i.e. texture index, 
@@ -280,20 +390,20 @@ def plot_texture_strength(sxrd_experiment_number: int, phase: str, texture_stren
         
     elif texture_strength_type == "111_pf_max":
         y_label = "111 Pole Figure Maxima (mrd)"
-        
+            
     ax1.minorticks_on()
     ax1.plot(ebsd_results["image_number"], ebsd_results[texture_strength_type], color = colour[0], linewidth = 4)
-    ax1.set_xlabel("Scan Number", fontsize = 30)
+    ax1.set_xlabel("Frame Number", fontsize = 30)
     ax1.set_ylabel(y_label, fontsize = 30)
 
     ax2.minorticks_on()
     ax2.plot(cpf_results["image_number"], cpf_results[texture_strength_type], color = colour[1], linewidth = 4)
-    ax2.set_xlabel("Scan Number", fontsize = 30)
+    ax2.set_xlabel("Frame Number", fontsize = 30)
     ax2.set_ylabel(y_label, fontsize = 30)
 
     ax3.minorticks_on()
     ax3.plot(maud_results["image_number"], maud_results[texture_strength_type], color = colour[2], linewidth = 4)
-    ax3.set_xlabel("Scan Number", fontsize = 30)
+    ax3.set_xlabel("Frame Number", fontsize = 30)
     ax3.set_ylabel(y_label, fontsize = 30)
 
     title = "i) EBSD \t\t\t  ii) Fourier Peak Analysis \t\t\t    iii) MAUD".expandtabs()
@@ -338,8 +448,9 @@ def plot_sxrd_map(sxrd_experiment_number: int, phase: str, texture_strength_type
 def plot_texture_strength_two_phase(output_folder: str, sxrd_experiment_number: int, 
                                     alpha_results: dict, beta_results: dict, 
                                     texture_strength_type: str,  fitting_type: str,
-                                    x_min: int, x_max: int, y_min: int, y_max: int):
-    """Plot texture strength versus image (scan) number
+                                    x_min: int, x_max: int, y_min: int, y_max: int, 
+                                    legend_location: str):
+    """Plot texture strength versus image (frame) number
     for EBSD, SXRD-CPF and SXRD-MAUD texture results for both 
     alpha and beta phases. Options available to plot thw type 
     of texture strength being plotted i.e. texture index or 
@@ -376,9 +487,9 @@ def plot_texture_strength_two_phase(output_folder: str, sxrd_experiment_number: 
     ax.minorticks_on()
     ax.plot(alpha_results["image_number"], alpha_results[texture_strength_type], color = "red", linewidth = 4, label = r"$\alpha$-phase")
     ax.plot(beta_results["image_number"], beta_results[texture_strength_type], color = "blue", linewidth = 4, label = r"$\beta$-phase")
-    ax.set_xlabel("Scan Number", fontsize = 30)
+    ax.set_xlabel("Frame Number", fontsize = 30)
     ax.set_ylabel(y_label, fontsize = 30)
-    ax.legend(loc="upper left", fontsize = 30)
+    ax.legend(loc=legend_location, fontsize = 30)
     ax.set_xlim(x_min,x_max)
     ax.set_ylim(y_min,y_max)
 
@@ -389,9 +500,10 @@ def plot_texture_strength_two_phase(output_folder: str, sxrd_experiment_number: 
     
 def plot_pf_intensity_two_phase(output_folder: str, sxrd_experiment_number: int, 
                                 phase: str, results: dict, fitting_type: str,
-                                x_min: int, x_max: int, y_min: int, y_max: int):
+                                x_min: int, x_max: int, y_min: int, y_max: int, 
+                                legend_location: str):
     """Plot pole figure intensity maxima for multiple lattice planes
-    versus image (scan) number for EBSD, SXRD-CPF and SXRD-MAUD texture 
+    versus image (frame) number for EBSD, SXRD-CPF and SXRD-MAUD texture 
     results for either alpha or beta phases. Options available to plot 
     the type of texture strength being plotted i.e. texture index or 
     ODF maxima.
@@ -414,9 +526,9 @@ def plot_pf_intensity_two_phase(output_folder: str, sxrd_experiment_number: int,
         ax.plot(results["image_number"], results["0002_pf_max"], color = "red", linewidth = 4, label = "{0002}")
         ax.plot(results["image_number"], results["11-20_pf_max"], color = "red", linewidth = 4, alpha = 0.5, label = "{11-20}")
         ax.plot(results["image_number"], results["10-10_pf_max"], color = "red", linewidth = 4, alpha = 0.2, label = "{10-10}")
-        ax.set_xlabel("Scan Number", fontsize = 30)
+        ax.set_xlabel("Frame Number", fontsize = 30)
         ax.set_ylabel("Pole Figure Maxima (mrd)", fontsize = 30)
-        ax.legend(loc="upper right", fontsize = 30)
+        ax.legend(loc=legend_location, fontsize = 30)
         ax.set_xlim(x_min,x_max)
         ax.set_ylim(y_min,y_max)
 
@@ -429,9 +541,9 @@ def plot_pf_intensity_two_phase(output_folder: str, sxrd_experiment_number: int,
         ax.plot(results["image_number"], results["110_pf_max"], color = "blue", linewidth = 4, label = "{110}")
         ax.plot(results["image_number"], results["001_pf_max"], color = "blue", linewidth = 4, alpha = 0.5, label = "{001}")
         ax.plot(results["image_number"], results["111_pf_max"], color = "blue", linewidth = 4, alpha = 0.2, label = "{111}")
-        ax.set_xlabel("Scan Number", fontsize = 30)
+        ax.set_xlabel("Frame Number", fontsize = 30)
         ax.set_ylabel("Pole Figure Maxima (mrd)", fontsize = 30)
-        ax.legend(loc="upper left", fontsize = 30)
+        ax.legend(loc=legend_location, fontsize = 30)
         ax.set_xlim(x_min,x_max)
         ax.set_ylim(y_min,y_max)
 

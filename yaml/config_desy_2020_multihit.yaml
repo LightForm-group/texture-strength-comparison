@@ -1,0 +1,33 @@
+file_paths:
+    sxrd_cpf_alpha_results_file: ../../SXRD_results/desy_2020/experiment{experiment_number:02d}b-deformation/fourier-peak-analysis-texture/{experiment_number:02d}b-stage-{stage_number:01d}-raw-intensities/alpha/{experiment_number:02d}_texture_strength.txt
+# File path to the SXRD texture results for the alpha-phase, refined using Continuous_Peak_fit with Fourier peak analysis.
+
+    sxrd_cpf_beta_results_file: ../../SXRD_results/desy_2020/experiment{experiment_number:02d}b-deformation/fourier-peak-analysis-texture/{experiment_number:02d}b-stage-{stage_number:01d}-raw-intensities/beta/{experiment_number:02d}_texture_strength.txt
+# File path to the SXRD texture results for the beta-phase, refined using Continuous_Peak_fit with Fourier peak analysis.
+    
+    output_folder: ../../SXRD_results/desy_2020/texture_strength/
+# File path to output folder for saving the results and figure images from the analysis.
+    
+user_inputs:
+    sxrd_experiment_number: 18
+# Experiment number for the SXRD results.
+
+    stage_number:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+
+    image_number_end:
+      - 2007
+      - 515
+      - 514
+      - 514
+      - 2275
+
+    phase_1: alpha
+# Name of phase 1    
+    
+    phase_2: beta
+# Name of phase 2      
