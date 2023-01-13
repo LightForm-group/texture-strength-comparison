@@ -28,4 +28,13 @@ user_inputs:
 # Name of phase 1    
     
     phase_2: beta
-# Name of phase 2      
+# Name of phase 2
+
+    shape_vertical: 9
+# Number of vertical synchrotron measurements
+
+    shape_horizontal: 41
+# Number of horizontal synchrotron measurements
+
+    step_size: 0.5
+# Step size of stage scan synchrotron measurements

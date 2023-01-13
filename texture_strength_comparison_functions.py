@@ -18,7 +18,7 @@ def load_ebsd_alpha(config_path: str):
     :param config_path: path to the configuration file.
     
     :return: EBSD alpha texture results as a dictionary, 
-    containing arrrays of texture refinement data.
+    containing arrays of texture refinement data.
     """
     config = get_config(config_path)
     
@@ -57,7 +57,7 @@ def load_sxrd_cpf_alpha(config_path: str):
     :param config_path: path to the configuration file.
     
     :return: SXRD alpha texture results from Continuous-Peak-Fit 
-    as a dictionary, containing arrrays of texture refinement data.
+    as a dictionary, containing arrays of texture refinement data.
     """
     config = get_config(config_path)
     
@@ -85,6 +85,38 @@ def load_sxrd_cpf_alpha(config_path: str):
     
     return cpf_alpha_results
 
+def load_sxrd_cpf_alpha_additional(config_path: str):
+    """Load SXRD additional alpha-phase texture component phase fraction
+    results refined using Continuous-Peak-Fit, using Fourier peak analysis, 
+    from text file based on input parameters from a yaml configuration file.
+    
+    :param config_path: path to the configuration file.
+    
+    :return: SXRD alpha texture results from Continuous-Peak-Fit 
+    as a dictionary, containing arrays of texture refinement data.
+    """
+    config = get_config(config_path)
+    
+    sxrd_experiment_number = config["user_inputs"]["sxrd_experiment_number"]
+    print("The SXRD experiment number is: ", sxrd_experiment_number, sep = '\n', end = '\n\n')
+
+    sxrd_cpf_alpha_results_file = config["file_paths"]["sxrd_cpf_alpha_results_file"].format(experiment_number = sxrd_experiment_number)
+    print("The SXRD results file is: ", sxrd_cpf_alpha_results_file, sep = '\n', end = '\n\n')
+
+    sxrd_cpf_results_additional = np.loadtxt(sxrd_cpf_alpha_results_file, usecols = np.arange(0,13), dtype='str', skiprows = 1)
+    
+    cpf_alpha_results_additional = {
+                    "image_number" : sxrd_cpf_results_additional[:,0].astype(float),
+                    "basal_TD_volume_fraction": sxrd_cpf_results_additional[:,9].astype(float),
+                    "basal_ND_volume_fraction": sxrd_cpf_results_additional[:,10].astype(float),
+                    "basal_RD_volume_fraction": sxrd_cpf_results_additional[:,11].astype(float),
+                    "basal_45_volume_fraction": sxrd_cpf_results_additional[:,12].astype(float)
+                    }
+    
+    print("The SXRD results using Fourier peak analysis have been written to new arrays with the following keys: ", cpf_alpha_results_additional.keys(), sep = '\n', end = '\n\n')
+    
+    return cpf_alpha_results_additional
+
 def load_sxrd_cpf_alpha_multihit(config_path: str):
     """Load SXRD alpha-phase texture results refined using 
     Continuous-Peak-Fit, using Fourier peak analysis, from 
@@ -93,7 +125,7 @@ def load_sxrd_cpf_alpha_multihit(config_path: str):
     :param config_path: path to the configuration file.
     
     :return: SXRD alpha texture results from Continuous-Peak-Fit 
-    as a dictionary, containing arrrays of texture refinement data.
+    as a dictionary, containing arrays of texture refinement data.
     """
     config = get_config(config_path)
     
@@ -148,7 +180,7 @@ def load_sxrd_maud_alpha(config_path: str):
     :param config_path: path to the configuration file.
     
     :return: SXRD alpha texture results from MAUD as a dictionary, 
-    containing arrrays of texture refinement data.
+    containing arrays of texture refinement data.
     """
     config = get_config(config_path)
     
@@ -180,7 +212,7 @@ def load_ebsd_beta(config_path: str):
     :param config_path: path to the configuration file.
     
     :return: EBSD beta texture results as a dictionary, 
-    containing arrrays of texture refinement data.
+    containing arrays of texture refinement data.
     """
     config = get_config(config_path)
     
@@ -220,7 +252,7 @@ def load_sxrd_cpf_beta(config_path: str):
     :param config_path: path to the configuration file.
     
     :return: SXRD beta texture results from Continuous-Peak-Fit 
-    as a dictionary, containing arrrays of texture refinement data.
+    as a dictionary, containing arrays of texture refinement data.
     """
     config = get_config(config_path)
     
@@ -248,6 +280,38 @@ def load_sxrd_cpf_beta(config_path: str):
     
     return cpf_beta_results
 
+def load_sxrd_cpf_beta_additional(config_path: str):
+    """Load SXRD additional beta-phase texture component phase fraction
+    results refined using Continuous-Peak-Fit, using Fourier peak analysis, 
+    from text file based on input parameters from a yaml configuration file.
+    
+    :param config_path: path to the configuration file.
+    
+    :return: SXRD beta texture results from Continuous-Peak-Fit 
+    as a dictionary, containing arrays of texture refinement data.
+    """
+    config = get_config(config_path)
+    
+    sxrd_experiment_number = config["user_inputs"]["sxrd_experiment_number"]
+    print("The SXRD experiment number is: ", sxrd_experiment_number, sep = '\n', end = '\n\n')
+
+    sxrd_cpf_beta_results_file = config["file_paths"]["sxrd_cpf_beta_results_file"].format(experiment_number = sxrd_experiment_number)
+    print("The SXRD results file is: ", sxrd_cpf_beta_results_file, sep = '\n', end = '\n\n')
+
+    sxrd_cpf_results_additional = np.loadtxt(sxrd_cpf_beta_results_file, usecols = np.arange(0,13), dtype='str', skiprows = 1)
+    
+    cpf_beta_results_additional = {
+                    "image_number" : sxrd_cpf_results_additional[:,0].astype(float),
+                    "cube_volume_fraction": sxrd_cpf_results_additional[:,9].astype(float),
+                    "rotated_cube_volume_fraction": sxrd_cpf_results_additional[:,10].astype(float),
+                    "alpha_fibre_volume_fraction": sxrd_cpf_results_additional[:,11].astype(float),
+                    "gamma_fibre_volume_fraction": sxrd_cpf_results_additional[:,12].astype(float)
+                    }
+    
+    print("The SXRD results using Fourier peak analysis have been written to new arrays with the following keys: ", cpf_beta_results_additional.keys(), sep = '\n', end = '\n\n')
+    
+    return cpf_beta_results_additional
+
 def load_sxrd_cpf_beta_multihit(config_path: str):
     """Load SXRD beta-phase texture results refined using 
     Continuous-Peak-Fit, using Fourier peak analysis, from 
@@ -256,7 +320,7 @@ def load_sxrd_cpf_beta_multihit(config_path: str):
     :param config_path: path to the configuration file.
     
     :return: SXRD beta texture results from Continuous-Peak-Fit 
-    as a dictionary, containing arrrays of texture refinement data.
+    as a dictionary, containing arrays of texture refinement data.
     """
     config = get_config(config_path)
     
@@ -311,7 +375,7 @@ def load_sxrd_maud_beta(config_path: str):
     :param config_path: path to the configuration file.
     
     :return: SXRD beta texture results from MAUD as a dictionary, 
-    containing arrrays of texture refinement data.
+    containing arrays of texture refinement data.
     """
     config = get_config(config_path)
     
@@ -415,7 +479,8 @@ def plot_texture_strength(sxrd_experiment_number: int, phase: str, texture_stren
     print(f"Figure saved to: {output_folder}{sxrd_experiment_number}_{phase}_{texture_strength_type}.png")
 
 def plot_sxrd_map(sxrd_experiment_number: int, phase: str, texture_strength_type: str, output_folder: str, 
-                  cpf_results: dict, c_map: str, v_min: int, v_max: int):
+                  cpf_results: dict, c_map: str, shape_vertical: int, shape_horizontal: int, step_size: float, 
+                  figsize_vertical: int, figsize_horizontal: int, v_min: int, v_max: int):
     """Plot 2D map of SXRD pole figure intensities, as well as 
     texture strength, in X,Y positions,from SXRD texture results 
     refined using Continuous-Peak-Fit. Options available to select 
@@ -430,13 +495,29 @@ def plot_sxrd_map(sxrd_experiment_number: int, phase: str, texture_strength_type
     :param output_folder: File path to the output folder.
     :param cpf_results: Dictionary containing arrays of SXRD texture results, refined using Continuous-Peak-Fit.
     :param c_map: Colour of the map i.e. Reds, Blues, Greens, etc.
+    :param shape_vertical: Number of vertical synchrotron measurements.
+    :param shape_horizontal: Number of horizontal synchrotron measurements.
+    :param figsize_vertical: Figure size in vertical direction.
+    :param figsize_horizontal: Figure size in horizontal direction.
+    :param step_size: Step size of stage scan synchrotron measurements.
     :param v_min: Set minimum value of the colour scale.
     :param v_max: Set maximum value of the colour scale.
     """
-    fig, ax = plt.subplots(figsize=(20, 10))
+    plt.rc('xtick', labelsize = 24)
+    plt.rc('ytick', labelsize = 24)
+    plt.rc('legend', fontsize = 20)
+    plt.rc('axes', linewidth = 2)
+    plt.rc('xtick.major', width = 2, size = 10)
+    plt.rc('xtick.minor', width = 2, size = 5)
+    plt.rc('ytick.major', width = 2, size = 10)
+    plt.rc('ytick.minor', width = 2, size = 5)
+    
+    fig, ax = plt.subplots(figsize=(figsize_horizontal, figsize_vertical))
     cpf_texture_strength = np.array(cpf_results[texture_strength_type])
-    shape = (9, 41)
-    image = ax.imshow(cpf_texture_strength.reshape(shape), interpolation='nearest', cmap = c_map, vmin = v_min, vmax = v_max, extent=[0,20,0,4])
+    shape = (shape_vertical, shape_horizontal)
+    extent_vertical = (shape_vertical - 1)*step_size
+    extent_horizontal = (shape_horizontal - 1)*step_size
+    image = ax.imshow(cpf_texture_strength.reshape(shape), interpolation='nearest', cmap = c_map, vmin = v_min, vmax = v_max, extent=[0,extent_horizontal,0,extent_vertical])
     ax.set_xlabel("X (mm)", fontsize = 25)
     ax.set_ylabel("Y (mm)", fontsize = 25, rotation = 0, labelpad=50)
     plt.colorbar(image, ax=ax, location = 'top', shrink = 0.4)
@@ -504,9 +585,7 @@ def plot_pf_intensity_two_phase(output_folder: str, sxrd_experiment_number: int,
                                 legend_location: str):
     """Plot pole figure intensity maxima for multiple lattice planes
     versus image (frame) number for EBSD, SXRD-CPF and SXRD-MAUD texture 
-    results for either alpha or beta phases. Options available to plot 
-    the type of texture strength being plotted i.e. texture index or 
-    ODF maxima.
+    results for either alpha or beta phases.
     
     :param output_folder: File path to the output folder.
     :param sxrd_experiment_number: Experiment number for the SXRD test.
@@ -518,6 +597,15 @@ def plot_pf_intensity_two_phase(output_folder: str, sxrd_experiment_number: int,
     :param y_min: Minimum value for the y-axis.
     :param y_max: Maximum value for the y-axis.
     """
+    plt.rc('xtick', labelsize = 24)
+    plt.rc('ytick', labelsize = 24)
+    plt.rc('legend', fontsize = 20)
+    plt.rc('axes', linewidth = 2)
+    plt.rc('xtick.major', width = 2, size = 10)
+    plt.rc('xtick.minor', width = 2, size = 5)
+    plt.rc('ytick.major', width = 2, size = 10)
+    plt.rc('ytick.minor', width = 2, size = 5)
+    
     fig, ax = plt.subplots(1, 1, figsize = (12.5, 10))
     
     if phase == "alpha":
@@ -554,3 +642,69 @@ def plot_pf_intensity_two_phase(output_folder: str, sxrd_experiment_number: int,
     fig.savefig(f"{output_folder}{fitting_type}/{sxrd_experiment_number:03d}_{phase}_pf_max_{fitting_type}.png")
     
     print(f"Figure saved to: {output_folder}{fitting_type}/{sxrd_experiment_number:03d}_{phase}_pf_max_{fitting_type}.png")
+    
+def plot_texture_component_two_phase(output_folder: str, sxrd_experiment_number: int, 
+                                     phase: str, results: dict, fitting_type: str,
+                                     x_min: int, x_max: int, y_min: int, y_max: int, 
+                                     legend_location: str):
+    """Plot pole figure intensity maxima for multiple lattice planes
+    versus image (frame) number for EBSD, SXRD-CPF and SXRD-MAUD texture 
+    results for either alpha or beta phases.
+    
+    :param output_folder: File path to the output folder.
+    :param sxrd_experiment_number: Experiment number for the SXRD test.
+    :param phase: Choose the phase, either 'alpha' or 'beta', to set the lattice plane peaks.
+    :param results: Dictionary containing arrays of EBSD, SXRD-CPF, or SXRD-MAUD texture results for either alpha or beta phases.
+    :param fitting_type: Choose either 'ebsd, 'cpf', or 'maud' to signify the data analysis (fitting) used.
+    :param x_min: Minimum value for the x-axis.
+    :param x_max: Maximum value for the x-axis.
+    :param y_min: Minimum value for the y-axis.
+    :param y_max: Maximum value for the y-axis.
+    """
+    plt.rc('xtick', labelsize = 24)
+    plt.rc('ytick', labelsize = 24)
+    plt.rc('legend', fontsize = 20)
+    plt.rc('axes', linewidth = 2)
+    plt.rc('xtick.major', width = 2, size = 10)
+    plt.rc('xtick.minor', width = 2, size = 5)
+    plt.rc('ytick.major', width = 2, size = 10)
+    plt.rc('ytick.minor', width = 2, size = 5)
+    
+    fig, ax = plt.subplots(1, 1, figsize = (12.5, 10))
+    
+    if phase == "alpha":
+    
+        ax.minorticks_on()
+        ax.plot(results["image_number"], results["basal_TD_volume_fraction"], color = "red", linewidth = 4, label = "Basal TD Volume Fraction")
+        ax.plot(results["image_number"], results["basal_ND_volume_fraction"], color = "red", linewidth = 4, alpha = 0.7, label = "Basal ND Volume Fraction")
+        ax.plot(results["image_number"], results["basal_RD_volume_fraction"], color = "red", linewidth = 4, alpha = 0.5, label = "Basal RD Volume Fraction")
+        ax.plot(results["image_number"], results["basal_45_volume_fraction"], color = "red", linewidth = 4, alpha = 0.2, label = "Basal 45 Volume Fraction")
+        ax.set_xlabel("Frame Number", fontsize = 30)
+        ax.set_ylabel("Texture Component Volume Fraction (%)", fontsize = 30)
+        ax.legend(loc=legend_location, fontsize = 30)
+        ax.set_xlim(x_min,x_max)
+        ax.set_ylim(y_min,y_max)
+
+        title = r"a) $\alpha$-phase".expandtabs()
+        fig.suptitle(title, x = 0.515, y = 0.97, fontsize = 36)
+
+    elif phase == "beta":
+    
+        ax.minorticks_on()
+        ax.plot(results["image_number"], results["cube_volume_fraction"], color = "blue", linewidth = 4, label = "Cube Volume Fraction")
+        ax.plot(results["image_number"], results["rotated_cube_volume_fraction"], color = "blue", linewidth = 4, alpha = 0.7, label = "Rotated Cube Volume Fraction")
+        ax.plot(results["image_number"], results["alpha_fibre_volume_fraction"], color = "blue", linewidth = 4, alpha = 0.5, label = r"$\alpha$-Fibre Volume Fraction")
+        ax.plot(results["image_number"], results["gamma_fibre_volume_fraction"], color = "blue", linewidth = 4, alpha = 0.2, label = r"$\gamma$-Fibre Volume Fraction")
+        ax.set_xlabel("Frame Number", fontsize = 30)
+        ax.set_ylabel("Texture Component Volume Fraction (%)", fontsize = 30)
+        ax.legend(loc=legend_location, fontsize = 30)
+        ax.set_xlim(x_min,x_max)
+        ax.set_ylim(y_min,y_max)
+
+        title = r"b) $\beta$-phase".expandtabs()
+        fig.suptitle(title, x = 0.515, y = 0.97, fontsize = 36)
+        
+    fig.tight_layout()
+    fig.savefig(f"{output_folder}{fitting_type}/{sxrd_experiment_number:03d}_{phase}_texture_component_{fitting_type}.png")
+    
+    print(f"Figure saved to: {output_folder}{fitting_type}/{sxrd_experiment_number:03d}_{phase}_texture_component_{fitting_type}.png")
