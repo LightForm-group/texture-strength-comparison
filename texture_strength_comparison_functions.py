@@ -474,7 +474,7 @@ def plot_texture_strength(sxrd_experiment_number: int, phase: str, texture_stren
     fig.suptitle(title, x = 0.515, y = 0.97, fontsize = 36)
 
     fig.tight_layout()
-    fig.savefig(f"{output_folder}{sxrd_experiment_number}_{phase}_{texture_strength_type}.png")
+    fig.savefig(f"{output_folder}{sxrd_experiment_number}_{phase}_{texture_strength_type}.png", facecolor = "white", edgecolor = "white")
     
     print(f"Figure saved to: {output_folder}{sxrd_experiment_number}_{phase}_{texture_strength_type}.png")
 
@@ -521,8 +521,8 @@ def plot_sxrd_map(sxrd_experiment_number: int, phase: str, texture_strength_type
     ax.set_xlabel("X (mm)", fontsize = 25)
     ax.set_ylabel("Y (mm)", fontsize = 25, rotation = 0, labelpad=50)
     plt.colorbar(image, ax=ax, location = 'top', shrink = 0.4)
-    fig.tight_layout()
-    fig.savefig(f"{output_folder}{sxrd_experiment_number}_{phase}_{texture_strength_type}_SXRD_map.png")
+#     fig.tight_layout()
+    fig.savefig(f"{output_folder}{sxrd_experiment_number}_{phase}_{texture_strength_type}_SXRD_map.png", facecolor = "white", edgecolor = "white")
     
     print(f"Figure saved to: {output_folder}{sxrd_experiment_number}_{phase}_{texture_strength_type}_SXRD_map.png")
     
@@ -575,7 +575,7 @@ def plot_texture_strength_two_phase(output_folder: str, sxrd_experiment_number: 
     ax.set_ylim(y_min,y_max)
 
     fig.tight_layout()
-    fig.savefig(f"{output_folder}{fitting_type}/{sxrd_experiment_number:03d}_{texture_strength_type}_{fitting_type}.png")
+    fig.savefig(f"{output_folder}{fitting_type}/{sxrd_experiment_number:03d}_{texture_strength_type}_{fitting_type}.png", facecolor = "white", edgecolor = "white")
     
     print(f"Figure saved to: {output_folder}{fitting_type}/{sxrd_experiment_number:03d}_{texture_strength_type}_{fitting_type}.png")
     
@@ -639,7 +639,7 @@ def plot_pf_intensity_two_phase(output_folder: str, sxrd_experiment_number: int,
         fig.suptitle(title, x = 0.515, y = 0.97, fontsize = 36)
         
     fig.tight_layout()
-    fig.savefig(f"{output_folder}{fitting_type}/{sxrd_experiment_number:03d}_{phase}_pf_max_{fitting_type}.png")
+    fig.savefig(f"{output_folder}{fitting_type}/{sxrd_experiment_number:03d}_{phase}_pf_max_{fitting_type}.png", facecolor = "white", edgecolor = "white")
     
     print(f"Figure saved to: {output_folder}{fitting_type}/{sxrd_experiment_number:03d}_{phase}_pf_max_{fitting_type}.png")
     
@@ -705,6 +705,6 @@ def plot_texture_component_two_phase(output_folder: str, sxrd_experiment_number:
         fig.suptitle(title, x = 0.515, y = 0.97, fontsize = 36)
         
     fig.tight_layout()
-    fig.savefig(f"{output_folder}{fitting_type}/{sxrd_experiment_number:03d}_{phase}_texture_component_{fitting_type}.png")
+    fig.savefig(f"{output_folder}{fitting_type}/{sxrd_experiment_number:03d}_{phase}_texture_component_{fitting_type}.png", facecolor = "white", edgecolor = "white")
     
     print(f"Figure saved to: {output_folder}{fitting_type}/{sxrd_experiment_number:03d}_{phase}_texture_component_{fitting_type}.png")
