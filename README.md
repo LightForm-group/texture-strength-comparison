@@ -1,11 +1,13 @@
 texture-strength-comparison
 -----------
 
-A set of python scripts for comparing the texture strength output of synchrotron X-ray diffraction (SXRD) and electron backscatter diffraction (EBSD) data processed using MTEX, producing texture intensity plots and 2D texture intensity maps.
+A set of Python scripts for comparing the crystallographic texture strength output of synchrotron X-ray diffraction (SXRD) and electron backscatter diffraction (EBSD) data processed using MTEX, to produce texture intensity plots, 2D texture intensity maps, and 2D texture component phase fraction distributions.
 
-This package has been used to analyse a number of synchrotron diffraction experiments at DESY and Diamond Light Source beamlines.
+This package has been used to analyse crystallographic texture distributions and in-situ texture changes in Ti-6Al-4V materials through a number of different synchrotron diffraction experiments at DESY and Diamond Light Source beamlines.
 
-Used to compare texture intensity variation from stage scan synchrotron measurements using MAUD and Continuous-Peak-Fit, with the texture variation recorded using an EBSD map that had been divided into equivalent sized squares as were used for the synchrotron analysis.
+This package has been used to compare texture intensity variation from stage scan synchrotron measurements using MAUD and Continuous-Peak-Fit, with the texture variation recorded using an EBSD map that had been divided into equivalent sized squares as were used for the synchrotron analysis.
+
+Synchrotron data was first analysed using either the [MAUD-batch-analysis](https://github.com/LightForm-group/MAUD-batch-analysis) or [continuous-peak-fit-analysis](https://github.com/LightForm-group/continuous-peak-fit-analysis) packages, to measure the texture distribution across different samples, or to record the in-situ texture evolution during different high temperature deformation experiments. EBSD data was first analysed using the [MTEX-texture-block-analysis](https://github.com/LightForm-group/MTEX-texture-block-analysis) package to divide the EBSD maps and measure the micro-texture distribution.
 
 Development
 --------------
@@ -25,6 +27,8 @@ Contents
 3. `texture_strength_comparison_desy_2020-21.ipynb` A notebook analysing texture intensity changes from a series of synchrotron measurements recorded during high temperature deformation of Ti-6Al-4V compression specimens, at different temperatures and strain rates. The texture data was fitted using Continuous-Peak-Fit.
 
 4. `texture_strength_comparison_desy_2020-21_multihit.ipynb` A notebook analysing texture intensity changes from a series of synchrotron measurements recorded during high temperature deformation of Ti-6Al-4V compression specimens, with multi-hit deformation and hold stages. The texture data was fitted using Continuous-Peak-Fit.
+
+5. `texture_strength_comparison_diamond_2022.ipynb` A notebook analysing texture intensity and texture component phase fraction changes from a series of synchrotron measurements recorded as a stage-scan (X-Y) across pre-rolled Ti-6Al-4V samples. The alpha and beta phase texture data was used to analyse texture intensity variation and texture component phase fraction variation from stage scan synchrotron measurements using Continuous-Peak-Fit.
 
 *Note, the `example-data/` and `example-analysis/` folders contain instuctions for downloading data that can be used as an example analysis, but a clear external file structure should be setup to support the analysis of large synchrotron datasets.*
 
@@ -72,7 +76,7 @@ pip list
 #pyyaml
 ```
 **8. If all in step 7 are present, you can now run the example notebooks.
-Ensure the venv is active and use the following command to boot jupyter notebook (using all libraries installed in the venv)
+Ensure the venv is active and use the following command to boot jupyter notebook (using all libraries installed in the venv).
 Warning - using just `jupyter notebook` without `python -m` can result in using your default python environment (the libraries may not be recognised):**
 ```unix
 python -m jupyter notebook
